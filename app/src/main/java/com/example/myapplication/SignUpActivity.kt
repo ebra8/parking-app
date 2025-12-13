@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.EditText
@@ -27,6 +28,8 @@ class SignUpActivity : AppCompatActivity() {
 
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()

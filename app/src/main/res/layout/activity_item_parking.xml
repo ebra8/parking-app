@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="12dp"
+app:cardCornerRadius="12dp"
+app:cardElevation="4dp"
+    android:id="@+id/main">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/imgParking"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parking1"/>
+
+    <TextView
+        android:id="@+id/txtParkingName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parking Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20 EGP / hour"
+        android:textColor="#4CAF50"
+        android:layout_marginTop="4dp"/>
+
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>
