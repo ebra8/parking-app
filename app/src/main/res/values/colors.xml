@@ -6,4 +6,5 @@
     <color name="primary_card">#FF6B6B</color>
     <color name="gradient_start">#FF6B6B</color>
     <color name="gradient_end">#FF8E53</color>
+    <color name="grey">#ADADAD</color>
 </resources>
