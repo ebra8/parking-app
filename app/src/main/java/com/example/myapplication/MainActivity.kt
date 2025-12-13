@@ -3,7 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
+
 import androidx.activity.ComponentActivity
 
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -23,9 +23,8 @@ class MainActivity : ComponentActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        // Display user's name if available
-        val currentUser = auth.currentUser
-        val userName = currentUser?.displayName ?: "User"
+
+
 
         val parkingList = listOf(
             Parking("Downtown Parking", "20 EGP / hour", R.drawable.parking1),
