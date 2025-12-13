@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChangeFontStyle.NoActionNar">
         <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".item_parking"
             android:exported="false" />
         <activity
@@ -33,7 +36,17 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
+            android:theme="@style/Theme.MyApplication"/>
+
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
             android:theme="@style/Theme.MyApplication" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyApplication" />
+
     </application>
 
 </manifest>

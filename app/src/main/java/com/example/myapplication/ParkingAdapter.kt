@@ -18,6 +18,7 @@ class ParkingAdapter(
         val imgParking: ImageView = itemView.findViewById(R.id.imgParking)
         val txtParkingName: TextView = itemView.findViewById(R.id.txtParkingName)
         val txtPrice: TextView = itemView.findViewById(R.id.txtPrice)
+//        val txtAvailability: TextView = itemView.findViewById(R.id.txtAvailability) // <-- NEW: Added this
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParkingViewHolder {
@@ -35,7 +36,7 @@ class ParkingAdapter(
         holder.txtParkingName.text = currentParking.name
         holder.txtPrice.text = currentParking.price
         holder.imgParking.setImageResource(currentParking.imageRes)
-
+//        holder.txtAvailability.text = currentParking.availability // <-- NEW: Set availability
         // Set click listener
         holder.itemView.setOnClickListener {
             onItemClick(currentParking)

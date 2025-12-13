@@ -154,4 +154,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView3" />
 
+
+    <!-- Footer with Setting and Profile Icons -->
+    <LinearLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#663AB6"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Left Space -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Settings Icon -->
+        <ImageView
+            android:id="@+id/settingsIcon"
+            android:layout_width="38dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="40dp"
+            android:contentDescription="Settings"
+            android:src="@drawable/settings"
+            app:tint="#666666" />
+
+        <!-- Profile Icon -->
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
+            android:contentDescription="Profile"
+            android:src="@drawable/profile"
+            app:tint="#666666" />
+
+        <!-- Right Space -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

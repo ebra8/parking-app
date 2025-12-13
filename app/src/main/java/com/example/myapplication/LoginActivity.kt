@@ -21,6 +21,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
 
+        //   from ai
+        val currentUser = firebaseAuth.currentUser
+
 
         binding.goToSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
