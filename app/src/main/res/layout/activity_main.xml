@@ -39,8 +39,8 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_location"
-                    android:tint="#FF6B6B" />
+                    android:src="@drawable/maps_and_flags"
+                    android:tint="@color/black" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -90,7 +90,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="12dp"
-                        android:src="@drawable/ic_search"
+                        android:src="@drawable/search"
                         android:tint="#999999" />
 
                     <EditText
