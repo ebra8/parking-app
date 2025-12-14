@@ -8,6 +8,7 @@
         <item name="android:layout_marginHorizontal">16dp</item>
         <item name="boxStrokeColor">@color/yellow</item>
         <item name="hintTextColor">@color/yellow</item>
+        <item name="android:statusBarColor">#512DA8</item>
     </style>
 
     <style name="LoginTextInputInnerFieldStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -21,16 +22,3 @@
     <item name="windowActionBar">false</item>
 </style>
 </resources>
-
-
-
-
-
-
-
-
-
-
-
-
-

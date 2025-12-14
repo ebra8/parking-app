@@ -23,7 +23,7 @@ class ParkingAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParkingViewHolder {
         // Inflate the item layout
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_item_parking, parent, false)
+            .inflate(R.layout.parking_item, parent, false)
         return ParkingViewHolder(view)
     }
 

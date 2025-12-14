@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Parkly</string>
     <string name="title_activity_login_in">loginInActivity</string>
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="type_your_email">Type your Email</string>

@@ -1,12 +1,15 @@
 package com.example.myapplication
 
-import androidx.compose.foundation.background
+import android.app.Activity
+import android.view.View
+import android.widget.TextView
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.DarkMode
@@ -21,28 +24,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun SettingsScreen(
-    onBackClick: () -> Unit,
     isDarkTheme: Boolean,
-    onThemeChanged: (Boolean) -> Unit
+    onThemeChanged: (Boolean) -> Unit,
+    onBackClick: () -> Unit
 ) {
     // Local state for notification toggle just for UI demo
     var notificationsEnabled by remember { mutableStateOf(true) }
 
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        val activity = context as? Activity
+        // Find the global header in MainActivity and turn it ON
+        val header = activity?.findViewById<View>(R.id.globalHeader)
+        val title = activity?.findViewById<TextView>(R.id.globalTitleText)
+
+        header?.visibility = View.VISIBLE
+        title?.text = "Settings"
+    }
+
     Scaffold(
-        topBar = {
-            // Pass isDarkTheme here to control the color of the text and icon
-            SettingsTopBar(onBackClick, isDarkTheme)
-        },
         containerColor = if (isDarkTheme) Color(0xFF121212) else Color(0xFFF5F5F5)
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(top = 100.dp)
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp)
         ) {
@@ -96,7 +106,7 @@ fun SettingsScreen(
             SettingsCard(isDarkTheme) {
                 SettingsItem(
                     title = "Help Center",
-                    icon = Icons.Default.HelpOutline,
+                    icon = Icons.AutoMirrored.Filled.HelpOutline,
                     isDarkTheme = isDarkTheme
                 ) {}
                 HorizontalDivider()
@@ -111,34 +121,6 @@ fun SettingsScreen(
 }
 
 // --- Helper Components ---
-
-@Composable
-fun SettingsTopBar(onBackClick: () -> Unit, isDarkTheme: Boolean) {
-    // Define the color based on the theme explicitly
-    val contentColor = if (isDarkTheme) Color.White else Color.Black
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        IconButton(onClick = onBackClick) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = "Back",
-                modifier = Modifier.rotate(180f),
-                tint = contentColor
-            )
-        }
-        Text(
-            text = "Settings",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = contentColor
-        )
-    }
-}
 
 @Composable
 fun SettingsSectionTitle(title: String, isDarkTheme: Boolean) {
@@ -236,9 +218,6 @@ fun SettingsSwitchItem(
         )
     }
 }
-
-// Needed for the back arrow rotation logic
-fun Modifier.rotate(degrees: Float) = this.then(Modifier.graphicsLayer(rotationZ = degrees))
 
 @Preview
 @Composable

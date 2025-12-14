@@ -31,7 +31,6 @@ class ProfileFragment : Fragment() {
                             FirebaseAuth.getInstance().signOut()
                             activity?.finish()
                         },
-                        // --- FIX IS HERE ---
                         onSettingsClick = {
                             // Load the SettingsFragment into the same container
                             parentFragmentManager.beginTransaction()
@@ -39,7 +38,6 @@ class ProfileFragment : Fragment() {
                                 .addToBackStack(null)
                                 .commit()
                         }
-                        // -------------------
                     )
                 }
             }

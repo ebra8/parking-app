@@ -1,14 +1,11 @@
 package com.example.myapplication
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Edit
@@ -18,15 +15,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
+import com.google.firebase.auth.FirebaseAuth
 
 
 
@@ -40,31 +37,36 @@ data class ProfileMenuOption(
 @Composable
 fun ProfileScreen(
     username: String,
+    onSettingsClick: () -> Unit,
     onBackClick: () -> Unit,
-    onLogoutClick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onLogoutClick: () -> Unit?
 ) {
+    val context = LocalContext.current
+
     // Define the menu items
     val menuOptions = listOf(
         ProfileMenuOption("Your profile", Icons.Outlined.Person) {},
-//        ProfileMenuOption("Payment Methods", Icons.Outlined.CreditCard) {},
         ProfileMenuOption("Settings", Icons.Outlined.Settings, onSettingsClick),
         ProfileMenuOption("Help Center", Icons.Outlined.Info) {},
         ProfileMenuOption("Privacy Policy", Icons.Outlined.Lock) {},
-//        ProfileMenuOption("Invites Friends", Icons.Outlined.PersonAdd) {},
-        ProfileMenuOption("Log out", Icons.AutoMirrored.Filled.ExitToApp, onLogoutClick)
+        ProfileMenuOption("Log out", Icons.AutoMirrored.Filled.ExitToApp){
+            FirebaseAuth.getInstance().signOut()
+
+            val intent = Intent(context, AuthActivity::class.java)
+
+            // Clear back stack so they can't go back
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            context.startActivity(intent)
+        }
     )
 
     Scaffold(
-        topBar = {
-            ProfileTopBar(onBackClick)
-        },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(top = 116.dp)
                 .verticalScroll(rememberScrollState()), // Makes screen scrollable
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -78,32 +80,6 @@ fun ProfileScreen(
                 ProfileMenuItem(option)
             }
         }
-    }
-}
-
-@Composable
-fun ProfileTopBar(onBackClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier.align(Alignment.CenterStart)
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
-                tint = Color.Gray
-            )
-        }
-        Text(
-            text = "Profile",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.Center)
-        )
     }
 }
 
