@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import androidx.compose.ui.graphics.graphicsLayer
 
 @Composable
@@ -35,7 +34,8 @@ fun SettingsScreen(
 
     Scaffold(
         topBar = {
-            SettingsTopBar(onBackClick)
+            // Pass isDarkTheme here to control the color of the text and icon
+            SettingsTopBar(onBackClick, isDarkTheme)
         },
         containerColor = if (isDarkTheme) Color(0xFF121212) else Color(0xFFF5F5F5)
     ) { paddingValues ->
@@ -66,7 +66,7 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Section 2: App Preferences (Dark Mode lives here)
+            // Section 2: App Preferences
             SettingsSectionTitle("Preferences", isDarkTheme)
             SettingsCard(isDarkTheme) {
                 // Dark Mode Switch
@@ -113,7 +113,10 @@ fun SettingsScreen(
 // --- Helper Components ---
 
 @Composable
-fun SettingsTopBar(onBackClick: () -> Unit) {
+fun SettingsTopBar(onBackClick: () -> Unit, isDarkTheme: Boolean) {
+    // Define the color based on the theme explicitly
+    val contentColor = if (isDarkTheme) Color.White else Color.Black
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -125,14 +128,14 @@ fun SettingsTopBar(onBackClick: () -> Unit) {
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Back",
                 modifier = Modifier.rotate(180f),
-                tint = MaterialTheme.colorScheme.onBackground
+                tint = contentColor
             )
         }
         Text(
             text = "Settings",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
+            color = contentColor
         )
     }
 }
@@ -225,7 +228,11 @@ fun SettingsSwitchItem(
         }
         Switch(
             checked = checked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color.White,
+                checkedTrackColor = Color.Black // Optional: Customize switch colors
+            )
         )
     }
 }
@@ -236,7 +243,6 @@ fun Modifier.rotate(degrees: Float) = this.then(Modifier.graphicsLayer(rotationZ
 @Preview
 @Composable
 fun SettingsPreview() {
-    // State wrapper for preview functionality
     var isDark by remember { mutableStateOf(false) }
     SettingsScreen(
         onBackClick = {},

@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+        <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -27,13 +27,24 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/baseline_arrow_back_ios_new_24"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Go Back"
+                app:tint="@color/black"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp" />
+
             <ImageView
                 android:id="@+id/imgParking"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/parking1"
-                android:contentDescription="@string/parking_image_description" />
+                android:contentDescription="@string/parking_image_description"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

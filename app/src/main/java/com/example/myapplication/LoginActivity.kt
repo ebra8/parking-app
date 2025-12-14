@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
 
-        //   from ai
         val currentUser = firebaseAuth.currentUser
 
 
