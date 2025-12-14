@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#FFFFFF">
 
-    <!-- Purple Header Background -->
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
@@ -15,9 +12,6 @@
         android:background="#673AB7"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Location + City + Bell Row -->
-
-    <!-- Search Bar -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -116,7 +110,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Parkings Title -->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -124,27 +117,25 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="34dp"
         android:text="Parkings"
-        android:textColor="#000000"
+
+        android:textColor="?android:attr/textColorPrimary"
+
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/parkingView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
-        android:paddingBottom="16dp"
+        android:paddingBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView3" />
-
-
-    <!-- Footer with Setting and Profile Icons -->
     <LinearLayout
         android:id="@+id/footerLayout"
         android:layout_width="match_parent"
@@ -158,13 +149,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Left Space -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Settings Icon -->
         <ImageView
             android:id="@+id/settingsIcon"
             android:layout_width="38dp"
@@ -172,23 +161,31 @@
             android:layout_marginEnd="40dp"
             android:contentDescription="Settings"
             android:src="@drawable/settings"
-            app:tint="#666666" />
+            app:tint="#FFFFFF" />
 
-        <!-- Profile Icon -->
         <ImageView
             android:id="@+id/profileIcon"
             android:layout_width="48dp"
             android:layout_height="58dp"
             android:contentDescription="Profile"
             android:src="@drawable/profile"
-            app:tint="#666666" />
+            app:tint="#FFFFFF" />
 
-        <!-- Right Space -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,25 +1,26 @@
 package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-
-import androidx.activity.ComponentActivity
-
+import androidx.appcompat.app.AppCompatActivity // Change to AppCompatActivity for Fragment support
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.Fragment
 
-import androidx.recyclerview.widget.LinearLayoutManager
-
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val isDark = ThemeUtils.isDarkTheme(this)
+        ThemeUtils.applyTheme(isDark)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         auth = FirebaseAuth.getInstance()
 
         val parkingList = listOf(
@@ -29,27 +30,41 @@ class MainActivity : ComponentActivity() {
             Parking("Carrefour", "25 EGP / hour", R.drawable.parking4)
         )
 
+
+
         binding.parkingView.layoutManager = LinearLayoutManager(this)
+
+        // 1. Setup Adapter to load BookingFragment
         binding.parkingView.adapter = ParkingAdapter(parkingList) { parking ->
-            val intent = Intent(this, BookingActivity::class.java)
-            intent.putExtra("parking_name", parking.name)
-            intent.putExtra("parking_price", parking.price)
-            intent.putExtra("parking_image", parking.imageRes)
-            startActivity(intent)
+            val bookingFragment = BookingFragment.newInstance(
+                parking.name,
+                parking.price,
+                parking.imageRes
+            )
+            loadFragment(bookingFragment)
         }
 
+        // 2. Setup Profile Icon to load ProfileFragment
         val profileIcon = findViewById<ImageView>(R.id.profileIcon)
         profileIcon.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
+            loadFragment(ProfileFragment())
         }
 
+        // Settings can remain an Activity for now, or you can convert it similarly!
         val settingsIcon = findViewById<ImageView>(R.id.settingsIcon)
-        settingsIcon.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-        }
 
+        settingsIcon.setOnClickListener {
+            loadFragment(SettingsFragment())
+        }
+    }
+
+    // Helper function to swap fragments
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        // Replace the contents of the container with the new fragment
+        transaction.replace(R.id.fragment_container, fragment)
+        // Add to back stack so the "Back" button works naturally
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
-
